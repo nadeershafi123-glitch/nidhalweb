@@ -62,15 +62,16 @@ footer{text-align:center;padding:30px;opacity:.6}
 © 2026 Nidhal Portfolio
 </footer>
 <script>
-// SUPABASE CONFIG
 const supabaseUrl = "https://gvtfcwxyejmqxaqazdyc.supabase.co";
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2dGZjd3h5ZWptcXhhcWF6ZHljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwOTE1OTksImV4cCI6MjA4NzY2NzU5OX0.Py5bjITTz8aXEUQbF7lQQ9QN1vQnMjan7NYXv8WBQ5A";
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+const { createClient } = supabase;
+const supabaseClient = createClient(supabaseUrl, supabaseKey);
 
 const form = document.getElementById("feedbackForm");
 const statusDiv = document.getElementById("status");
 
-form.addEventListener("submit", async (e)=>{
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
   statusDiv.textContent = "Sending...";
 
@@ -78,12 +79,15 @@ form.addEventListener("submit", async (e)=>{
   const email = document.getElementById("email").value;
   const message = document.getElementById("message").value;
 
-  const {error} = await supabase.from("feedback").insert([{name,email,message}]);
+  const { error } = await supabaseClient
+    .from("feedback")
+    .insert([{ name, email, message }]);
 
-  if(error){
+  if (error) {
+    console.log(error);
     statusDiv.style.color = "#f87171";
     statusDiv.textContent = "Error sending message!";
-  }else{
+  } else {
     statusDiv.style.color = "#4ade80";
     statusDiv.textContent = "Message sent successfully!";
     form.reset();
