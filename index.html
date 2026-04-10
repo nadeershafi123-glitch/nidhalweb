@@ -10,11 +10,11 @@
 
 <style>
 :root{
-  --primary:#2563eb;
-  --secondary:#1d4ed8;
-  --accent:#38bdf8;
-  --dark:#1e3a8a;
-  --light:#ffffff;
+  --primary:#dc2626; /* red */
+  --secondary:#991b1b; /* dark red */
+  --accent:#ef4444;
+  --dark:#000000; /* black */
+  --light:#111111;
 }
 
 *{
@@ -25,8 +25,8 @@
 }
 
 body{
-  background:linear-gradient(135deg,#e0f2fe,#ffffff);
-  color:var(--dark)
+  background:linear-gradient(135deg,#000000,#1a0000);
+  color:#f1f5f9
 }
 
 header{
@@ -43,7 +43,7 @@ header h1{
 
 header p{
   margin-top:10px;
-  color:#334155;
+  color:#cbd5f5;
   font-size:1.1rem
 }
 
@@ -54,17 +54,17 @@ section{
 }
 
 .card{
-  background:rgba(255,255,255,.95);
+  background:rgba(0,0,0,.85);
   backdrop-filter:blur(10px);
   padding:30px;
   border-radius:20px;
-  box-shadow:0 10px 30px rgba(37,99,235,.15);
+  box-shadow:0 10px 30px rgba(220,38,38,.25);
   transition:.3s
 }
 
 .card:hover{
   transform:translateY(-5px);
-  box-shadow:0 15px 35px rgba(37,99,235,.25)
+  box-shadow:0 15px 35px rgba(220,38,38,.4)
 }
 
 h2{
@@ -91,15 +91,17 @@ form{
 input,textarea{
   padding:14px;
   border-radius:12px;
-  border:1px solid #cbd5e1;
+  border:1px solid #444;
   outline:none;
   font-size:14px;
+  background:#111;
+  color:#fff;
   transition:.3s
 }
 
 input:focus, textarea:focus{
   border-color:var(--primary);
-  box-shadow:0 0 0 3px rgba(37,99,235,.2)
+  box-shadow:0 0 0 3px rgba(220,38,38,.3)
 }
 
 button{
@@ -115,7 +117,7 @@ button{
 
 button:hover{
   transform:scale(1.05);
-  box-shadow:0 10px 20px rgba(37,99,235,.3)
+  box-shadow:0 10px 20px rgba(220,38,38,.4)
 }
 
 .status{
@@ -126,7 +128,7 @@ button:hover{
 footer{
   text-align:center;
   padding:30px;
-  color:#334155;
+  color:#aaa;
   margin-top:40px
 }
 </style>
@@ -184,7 +186,7 @@ const statusDiv = document.getElementById("status");
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   statusDiv.textContent = "Sending...";
-  statusDiv.style.color = "#1e3a8a";
+  statusDiv.style.color = "#f87171";
 
   const name = document.getElementById("name").value;
   const email = document.getElementById("email").value;
@@ -196,10 +198,10 @@ form.addEventListener("submit", async (e) => {
 
   if (error) {
     console.log(error);
-    statusDiv.style.color = "#dc2626";
+    statusDiv.style.color = "#ef4444";
     statusDiv.textContent = "Error sending message!";
   } else {
-    statusDiv.style.color = "#16a34a";
+    statusDiv.style.color = "#22c55e";
     statusDiv.textContent = "Message sent successfully!";
     form.reset();
   }
